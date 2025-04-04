@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SwitchCamera : MonoBehaviour
 {
 
     public Camera fpsCam;
-    public Camera camObj;
+    public Camera camView;
+
+    public Animator camAnimator;
+    public GameObject cameraObj;
 
     public bool camOnHand = false;
     public Collider[] invisibleColli;
@@ -17,7 +21,7 @@ public class SwitchCamera : MonoBehaviour
     {
         // Ensure the correct camera is enabled at start
         fpsCam.enabled = true;
-        camObj.enabled = false;
+        camView.enabled = false;
 
         nightVision.SetActive(false);
 
@@ -52,16 +56,30 @@ public class SwitchCamera : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             camOnHand = !camOnHand;
-            ToggleCamera(); // Toggle between FPS camera and Cam Obj
+
+            camAnimator.SetBool("UseCam", camOnHand);
+            //camAnimator.SetBool("CamOff", !camOnHand);
+            //camAnimator.SetBool("1stTimeTrigger", true);
+
+            StartCoroutine(ToggleCamera()); // Toggle between FPS camera and Cam Obj
+
+            //ToggleCamera(); 
             ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
         }
     }
 
-    void ToggleCamera()
+    IEnumerator ToggleCamera()
     {
+        //camAnimator.SetBool("UseCam", camOnHand);
+        yield return new WaitForSeconds(1.2f);
         fpsCam.enabled = !camOnHand;
-        camObj.enabled = camOnHand;
+        camView.enabled = camOnHand;
+
+        cameraObj.SetActive(!camOnHand);
         nightVision.SetActive(camOnHand);
+
+        camAnimator.SetBool("1stTimeTrigger", true);
+        camAnimator.SetBool("CamOff", !camOnHand);
     }
 
     void ToggleCollider(bool enable)
