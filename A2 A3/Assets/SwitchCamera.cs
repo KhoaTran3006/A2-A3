@@ -12,9 +12,7 @@ public class SwitchCamera : MonoBehaviour
     public Animator camAnimator;
     public GameObject cameraObj;
     [Header("======FadeOutEffect======")]
-    public CanvasGroup fadeCanvasGroup;
-    public float fadeDuration = 1f;
-    public GameObject blackScreen;
+
     [Header("==========Bool==========")]
     public bool camOnHand = false;
     public bool equipCam = false;
@@ -28,9 +26,6 @@ public class SwitchCamera : MonoBehaviour
         // Ensure the correct camera is enabled at start
         fpsCam.enabled = true;
         camView.enabled = false;
-
-        //Turn off black screen
-        blackScreen.SetActive(false);
 
         // Find all objects tagged as "InvisibleObject" and store their colliders
         GameObject[] invisibleObjs = GameObject.FindGameObjectsWithTag("InvisibleObject");
@@ -63,8 +58,15 @@ public class SwitchCamera : MonoBehaviour
         // Press E equip Camera first
         if (Input.GetKeyDown(KeyCode.E))
         {
-            equipCam = !equipCam;
-            CameraEquiped();
+            if (camOnHand)
+            {
+                return;
+            }
+            else
+            {
+                equipCam = !equipCam;
+                CameraEquiped();
+            }
         }
 
         // Press C to swtich view
@@ -77,7 +79,7 @@ public class SwitchCamera : MonoBehaviour
             ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
             if (!camOnHand)
             {
-                blackScreen.SetActive(!camOnHand);
+                // Trigger fade out effect
                 fadeOutScript.BlackScreenOut();
             }
         }
@@ -108,5 +110,7 @@ public class SwitchCamera : MonoBehaviour
     public void CameraEquiped()
     {
         camAnimator.SetBool("OnHand", equipCam);
+        camAnimator.SetBool("1stTimeTrigger", equipCam);
+        camAnimator.SetBool("TakeCamOff", true);
     }
 }

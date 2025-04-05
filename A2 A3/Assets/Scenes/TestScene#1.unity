@@ -461,9 +461,6 @@ MonoBehaviour:
   camView: {fileID: 1130780394}
   camAnimator: {fileID: 1248851792}
   cameraObj: {fileID: 1773152754}
-  fadeCanvasGroup: {fileID: 23690621}
-  fadeDuration: 1
-  blackScreen: {fileID: 23690617}
   camOnHand: 0
   equipCam: 0
   invisibleColli: []
@@ -1633,6 +1630,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeCanvasGroup: {fileID: 23690621}
   fadeDuration: 1
+  switchCamScript: {fileID: 150536184}
+  blackScreen: {fileID: 23690617}
 --- !u!1 &1048887887
 GameObject:
   m_ObjectHideFlags: 0
