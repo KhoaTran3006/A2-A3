@@ -7,6 +7,19 @@ public class FadeInFadeOut : MonoBehaviour
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 1f;
 
+    public void BlackScreenOut()
+    {
+        fadeCanvasGroup.blocksRaycasts = true;
+        float time = 0f;
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            fadeCanvasGroup.alpha = time / fadeDuration;
+            //yield return null;
+        }
+        fadeCanvasGroup.alpha = 1f;
+    }
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
@@ -18,7 +31,7 @@ public class FadeInFadeOut : MonoBehaviour
         {
             StartCoroutine(FadeOut());
         }
-        
+
     }
 
     public IEnumerator FadeIn()
@@ -46,5 +59,6 @@ public class FadeInFadeOut : MonoBehaviour
         }
         fadeCanvasGroup.alpha = 1f;
     }
+
 
 }
