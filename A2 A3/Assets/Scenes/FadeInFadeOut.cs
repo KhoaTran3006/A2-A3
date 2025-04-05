@@ -1,54 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class FadeInFadeOut : MonoBehaviour
 {
     public CanvasGroup fadeCanvasGroup;
     public float fadeDuration = 1f;
+    public SwitchCamera switchCamScript;
+    public GameObject blackScreen;
 
+    public void Start()
+    {
+        blackScreen.SetActive(false);
+    }
     public void BlackScreenOut()
     {
-        fadeCanvasGroup.blocksRaycasts = true;
-        float time = 0f;
-        while (time < fadeDuration)
-        {
-            time += Time.deltaTime;
-            fadeCanvasGroup.alpha = time / fadeDuration;
-            //yield return null;
-        }
-        fadeCanvasGroup.alpha = 1f;
+        StartCoroutine(FadeOut());
     }
-
-    private void Update()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            StartCoroutine(FadeIn());
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            StartCoroutine(FadeOut());
-        }
-
-    }
-
-    public IEnumerator FadeIn()
-    {
-        float time = fadeDuration;
-        while (time > 0f)
-        {
-            time -= Time.deltaTime;
-            fadeCanvasGroup.alpha = time / fadeDuration;
-            yield return null;
-        }
-        fadeCanvasGroup.alpha = 0f;
-        fadeCanvasGroup.blocksRaycasts = false;
-    }
-
     public IEnumerator FadeOut()
     {
+        blackScreen.SetActive(true);
+
+        // Increase the alpha of the black screen img
         fadeCanvasGroup.blocksRaycasts = true;
         float time = 0f;
         while (time < fadeDuration)
@@ -58,7 +32,9 @@ public class FadeInFadeOut : MonoBehaviour
             yield return null;
         }
         fadeCanvasGroup.alpha = 1f;
+        yield return new WaitForSeconds(0.2f);
+
+        // When done turn off the black screen
+        blackScreen.SetActive(false);
     }
-
-
 }
