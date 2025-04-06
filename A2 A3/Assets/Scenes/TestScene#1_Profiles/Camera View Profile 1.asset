@@ -111,19 +111,19 @@ MonoBehaviour:
     value: 0
   colorFilter:
     overrideState: 1
-    value: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
+    value: {r: 1, g: 1, b: 1, a: 1}
   hueShift:
     overrideState: 0
     value: 0
   saturation:
     overrideState: 1
-    value: -43
+    value: -77.75
   brightness:
     overrideState: 0
     value: 0
   postExposure:
     overrideState: 1
-    value: 4.84
+    value: 6.7
   contrast:
     overrideState: 1
     value: 6.95
