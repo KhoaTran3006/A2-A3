@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class InteractableItem : MonoBehaviour
 {
-    public GameObject inspectionPrefab; // Assign a clean prefab here in Inspector
+    public GameObject inspectionPrefab;
+    public string description;
     // Start is called before the first frame update
     void Start()
     {

@@ -396,6 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4692390546913958}
   - component: {fileID: 143067952354763362}
+  - component: {fileID: 8728352177483896710}
   - component: {fileID: 114925915917120512}
   - component: {fileID: 8917247259645491224}
   - component: {fileID: 1413103216}
@@ -453,6 +454,28 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.85, z: 0}
+--- !u!114 &8728352177483896710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221496511255106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d8541abeef20741b1d2b848ea07b79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactDistance: 3
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 321
+  onhandPos: {fileID: 8047602975104986448}
+  inspectionUI: {fileID: 0}
+  playerMovementScript: {fileID: 114925915917120512}
+  inspectDisplayPoint: {fileID: 6127861877532655660}
+  rotationSpeed: 200
+  cam: {fileID: 20764455326535260}
 --- !u!114 &114925915917120512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,6 +974,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4078642213076180}
   - component: {fileID: 20764455326535260}
+  - component: {fileID: 5229149288538077436}
   - component: {fileID: 124659855064273168}
   - component: {fileID: 81530301405379404}
   - component: {fileID: 78722117004793513}
@@ -974,7 +998,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6127861877532655660}
   m_Father: {fileID: 4910431633050106}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20764455326535260
@@ -1028,6 +1053,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &5229149288538077436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1327509270473940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a863e5484a8a264ea1d6c811a3ccfa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 3
+  shakeMagnitude: 0.15
 --- !u!124 &124659855064273168
 Behaviour:
   m_ObjectHideFlags: 0
@@ -1740,6 +1779,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8047602975104986448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6127861877532655660}
+  m_Layer: 7
+  m_Name: Inspection Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6127861877532655660
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8047602975104986448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.158}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4078642213076180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9192675567262355729
 GameObject:
   m_ObjectHideFlags: 0
