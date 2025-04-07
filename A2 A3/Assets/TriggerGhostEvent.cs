@@ -7,6 +7,7 @@ public class TriggerGhostEvent : MonoBehaviour
     public MovingGhost ghostScript;
     public Animator doorAnim;
     public Light light1, light2;
+    public CameraShaker shake;
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -19,6 +20,7 @@ public class TriggerGhostEvent : MonoBehaviour
     {
         doorAnim.SetBool("Oops", true);
         yield return new WaitForSeconds(0.5f);
+        shake.Shake();
 
         light1.enabled = false;
         light2.enabled = false;
