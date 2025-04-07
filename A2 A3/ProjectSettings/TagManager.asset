@@ -7,6 +7,9 @@ TagManager:
   - InvisibleObject
   - Ghost
   - LightZone
+  - Interactable
+  - Locked Doors
+  - Open Doors
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - UI
   - InvisibleObj
   - Post Processing 1
-  - 
+  - InteractableLayer
   - 
   - 
   - 
