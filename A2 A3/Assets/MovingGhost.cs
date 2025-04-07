@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostMovement : MonoBehaviour
+public class MovingGhost : MonoBehaviour
 {
     public float stepDistance = 5f;         // Distance per step
     public float stepDuration = 0.5f;         // Time between steps
