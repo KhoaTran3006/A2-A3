@@ -6,7 +6,7 @@ public class MovingGhost : MonoBehaviour
 {
     public float stepDistance = 5f;         // Distance per step
     public float stepDuration = 0.5f;         // Time between steps
-    private Vector3 moveDirection = Vector3.right; // Direction to move in
+    public Vector3 moveDirection = Vector3.right; // Direction to move in
 
     public bool isMoving = false;
     private bool hasStartedMoving = false;
