@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Hertzole.GoldPlayer;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MovingGhost : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class MovingGhost : MonoBehaviour
 
     public bool isMoving = false;
     private bool hasStartedMoving = false;
+
+    public GoldPlayerController movementScript;
 
     void Update()
     {
@@ -57,8 +61,17 @@ public class MovingGhost : MonoBehaviour
         }
         if (other.CompareTag("Player"))
         {
-            isMoving = false;
+            StartCoroutine(CatchYa());
+            //isMoving = false;
         }
+    }
+
+    IEnumerator CatchYa()
+    {
+        movementScript.enabled = false;
+        yield return new WaitForSeconds(2);
+        isMoving = false;
+        SceneManager.LoadScene("Scene 2");
     }
 }
 

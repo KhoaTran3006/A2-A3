@@ -8,20 +8,24 @@ public class TriggerGhostEvent : MonoBehaviour
     public Animator doorAnim;
     public Light light1, light2;
     public CameraShaker shake;
-    public AudioSource sound;
+    public AudioSource ghostSound;
+    public AudioSource doorSlam;
+    private bool hasTriggered = false;
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasTriggered)
         {
+            hasTriggered = true;
             StartCoroutine(ItsComing());
         }
     }
 
     IEnumerator ItsComing()
     {
-        sound.Play();
+        ghostSound.Play();
         doorAnim.SetBool("Oops", true);
         shake.Shake();
+        doorSlam.Play();
         yield return new WaitForSeconds(0.5f);
 
         light1.enabled = false;
