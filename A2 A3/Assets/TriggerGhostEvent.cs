@@ -8,6 +8,7 @@ public class TriggerGhostEvent : MonoBehaviour
     public Animator doorAnim;
     public Light light1, light2;
     public CameraShaker shake;
+    public AudioSource sound;
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -18,14 +19,16 @@ public class TriggerGhostEvent : MonoBehaviour
 
     IEnumerator ItsComing()
     {
+        sound.Play();
         doorAnim.SetBool("Oops", true);
-        yield return new WaitForSeconds(0.5f);
         shake.Shake();
+        yield return new WaitForSeconds(0.5f);
 
         light1.enabled = false;
         light2.enabled = false;
         yield return new WaitForSeconds(0.1f);
 
         ghostScript.isMoving = true;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
     }
 }
