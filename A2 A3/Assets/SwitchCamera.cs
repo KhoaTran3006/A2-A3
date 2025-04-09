@@ -74,20 +74,28 @@ public class SwitchCamera : MonoBehaviour
         {
             camOnHand = !camOnHand;
             camAnimator.SetBool("UseCam", camOnHand);
+            if (!camOnHand) // We are turning OFF the Spiritual Camera
+            {
+                if (ExamineSystem.ExamineUIManager.instance.examinableItem != null)
+                {
+                    ExamineSystem.ExamineUIManager.instance.examinableItem.ForceDropIfExamining();
+                }
+            }
 
             StartCoroutine(ToggleCamera()); // Toggle between FPS camera and Cam Obj
-            ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
-            if (!camOnHand)
-            {
-                // Trigger fade out effect
-                fadeOutScript.BlackScreenOut();
-            }
+            //ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
+           //if (!camOnHand)
+           //{
+           //    // Trigger fade out effect
+           //    fadeOutScript.BlackScreenOut();
+           //}
         }
     }
 
     IEnumerator ToggleCamera()
     {
-        yield return new WaitForSeconds(1.1f);
+        yield return new WaitForSeconds(1.1f); // wait for animation to finish
+
         // Switch view
         fpsCam.enabled = !camOnHand;
         camView.enabled = camOnHand;
@@ -96,6 +104,9 @@ public class SwitchCamera : MonoBehaviour
 
         camAnimator.SetBool("1stTimeTrigger", true);
         camAnimator.SetBool("CamOff", !camOnHand);
+
+       
+        ToggleCollider(camOnHand); ;
     }
 
     void ToggleCollider(bool enable)

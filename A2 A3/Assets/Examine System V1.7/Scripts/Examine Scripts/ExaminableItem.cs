@@ -102,6 +102,7 @@ namespace ExamineSystem
             get { return _hasChildren; }
             set { _hasChildren = value; }
         }
+        private Rigidbody rb;
 
         public bool hasInspectPoints
         {
@@ -112,6 +113,7 @@ namespace ExamineSystem
 
         void Start()
         {
+            rb = GetComponent<Rigidbody>();
             inspectPointLayer = 1 << LayerMask.NameToLayer(inspectLayer); //This finds the mask we want and adds it to the variable "inspectPointLayer"
 
             initialZoom = Mathf.Clamp(initialZoom, zoomRange.x, zoomRange.y);
@@ -196,6 +198,7 @@ namespace ExamineSystem
             examineUIManager = ExamineUIManager.instance;
 
             boxCollider.enabled = false;
+            if (rb != null) rb.isKinematic = true;
 
             EnableInspectPoints();
             ExamineDisableManager.instance.DisablePlayer(true);
@@ -269,6 +272,8 @@ namespace ExamineSystem
                     thisMat.DisableKeyword(emissive);
                 }
             }
+
+            if (rb != null) rb.isKinematic = false;
 
             switch (_UIType)
             {
@@ -511,5 +516,14 @@ namespace ExamineSystem
                 Debug.LogError(gameObject + $"FieldNullCheck: {fieldName} is not set in the inspector!");
             }
         }
+
+        public void ForceDropIfExamining()
+        {
+            if (canRotate)
+            {
+                DropObject(true);
+            }
+        }
     }
+    
 }
