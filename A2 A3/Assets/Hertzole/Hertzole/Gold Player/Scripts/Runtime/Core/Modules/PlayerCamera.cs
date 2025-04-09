@@ -34,7 +34,7 @@ namespace Hertzole.GoldPlayer
         [SerializeField]
         [EditorTooltip("How fast the camera head should move when looking around.")]
         [FormerlySerializedAs("mouseSensitivity")]
-        private Vector2 lookSensitivity = new Vector2(2f, 2f);
+        public Vector2 lookSensitivity = new Vector2(2f, 2f);
         [SerializeField]
         [EditorTooltip("Sets how smooth the movement should be.")]
         [FormerlySerializedAs("m_MouseDamping")]
@@ -48,25 +48,25 @@ namespace Hertzole.GoldPlayer
         [EditorTooltip("Sets how far up the player can look.")]
         [FormerlySerializedAs("m_MaximumX")]
         private float maximumX = 90f;
-        
-        [SerializeField] 
+
+        [SerializeField]
         [EditorTooltip("If true, the user will be allowed to zoom using the field of view.")]
         private bool enableZooming = false;
         [SerializeField]
         [Min(0.1f)]
         [EditorTooltip("The target field of view when zooming.")]
         private float targetZoom = 30;
-        [SerializeField] 
+        [SerializeField]
         [EditorTooltip("The time it takes to zoom in.")]
         private float zoomInTime = 0.2f;
-        [SerializeField] 
+        [SerializeField]
         private AnimationCurve zoomInCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
-        [SerializeField] 
+        [SerializeField]
         [EditorTooltip("The time it takes to zoom out.")]
         private float zoomOutTime = 0.2f;
-        [SerializeField] 
+        [SerializeField]
         private AnimationCurve zoomOutCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(1, 1));
-        [SerializeField] 
+        [SerializeField]
         [EditorTooltip("The action that will trigger the zooming.")]
         private string zoomInput = "Zoom";
 
@@ -89,7 +89,7 @@ namespace Hertzole.GoldPlayer
         private Unity.Cinemachine.CinemachineCamera targetVirtualCamera = null;
 #else
         private Cinemachine.CinemachineVirtualCamera targetVirtualCamera = null;
-        #endif
+#endif
 #endif
         [SerializeField]
         [EditorTooltip("The camera that the FOV kick should be applied to.")]
@@ -209,7 +209,7 @@ namespace Hertzole.GoldPlayer
         public float ZoomOutTime { get { return zoomOutTime; } set { zoomOutTime = value; } }
         /// <summary> The action that will trigger the zooming. </summary>
         public string ZoomInput { get { return zoomInput; } set { zoomInput = value; zoomHash = GoldPlayerController.InputNameToHash(value); } }
-        
+
         /// <summary> Settings related to field of view kick. </summary>
         public FOVKickClass FieldOfViewKick { get { return fieldOfViewKick; } set { fieldOfViewKick = value; } }
 
@@ -248,7 +248,7 @@ namespace Hertzole.GoldPlayer
         /// <summary> Fires when the camera shake ends. </summary>
         public event GoldPlayerDelegates.PlayerEvent OnEndCameraShake;
         /// <summary> Fires when the current field of view changes. </summary>
-        
+
         /// <summary> The camera that the FOV kick should be applied to. </summary>
         public Camera TargetCamera { get { return targetCamera; } set { targetCamera = value; } }
 #if GOLD_PLAYER_CINEMACHINE
@@ -259,7 +259,7 @@ namespace Hertzole.GoldPlayer
         public Unity.Cinemachine.CinemachineCamera TargetVirtualCamera { get { return targetVirtualCamera; } set { targetVirtualCamera = value; } }
 #else
         public Cinemachine.CinemachineVirtualCamera TargetVirtualCamera { get { return targetVirtualCamera; } set { targetVirtualCamera = value; } }
-        #endif
+#endif
 #endif
 
         /// <summary> The target camera field of view. </summary>
@@ -468,7 +468,7 @@ namespace Hertzole.GoldPlayer
             {
                 return;
             }
-            
+
             // If the zoom button is held down, do the zoom.
             if (GetButton(zoomHash))
             {
@@ -490,7 +490,7 @@ namespace Hertzole.GoldPlayer
                             originalZoomFieldOfView = fieldOfViewKick.TargetFieldOfView;
                         }
                     }
-                
+
                     // As long as the zoom timer is less than the zoom in time or the field of view is more than the target zoom, 
                     // set the zoom value.
                     if (zoomTimer < zoomInTime || CameraFieldOfView > targetZoom)

@@ -23,15 +23,16 @@ public class TriggerGhostEvent : MonoBehaviour
     IEnumerator ItsComing()
     {
         ghostSound.Play();
+        doorSlam.Play();
+
+        yield return new WaitForSeconds(0.5f);
         doorAnim.SetBool("Oops", true);
         shake.Shake();
-        doorSlam.Play();
-        yield return new WaitForSeconds(0.5f);
 
         light1.enabled = false;
         light2.enabled = false;
-        yield return new WaitForSeconds(0.1f);
 
+        yield return new WaitForSeconds(0.1f);
         ghostScript.isMoving = true;
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }

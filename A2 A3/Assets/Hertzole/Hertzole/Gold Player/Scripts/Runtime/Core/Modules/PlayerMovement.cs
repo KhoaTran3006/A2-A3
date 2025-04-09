@@ -21,7 +21,7 @@ namespace Hertzole.GoldPlayer
         [SerializeField]
         [EditorTooltip("The movement speeds when walking.")]
         [FormerlySerializedAs("m_WalkingSpeeds")]
-        private MovementSpeeds walkingSpeeds = new MovementSpeeds(3f, 2.5f, 2f);
+        public MovementSpeeds walkingSpeeds = new MovementSpeeds(3f, 2.5f, 2f);
 
         //////// RUNNING
         [SerializeField]
@@ -35,7 +35,7 @@ namespace Hertzole.GoldPlayer
         [SerializeField]
         [EditorTooltip("The movement speeds when running.")]
         [FormerlySerializedAs("m_RunSpeeds")]
-        private MovementSpeeds runSpeeds = new MovementSpeeds(7f, 5.5f, 5f);
+        public MovementSpeeds runSpeeds = new MovementSpeeds(7f, 5.5f, 5f);
         [SerializeField]
         [EditorTooltip("Everything related to stamina (limited running).")]
         [FormerlySerializedAs("m_Stamina")]
@@ -99,13 +99,13 @@ namespace Hertzole.GoldPlayer
         private float crouchHeight = 1f;
         [SerializeField]
         [EditorTooltip("How long it takes to crouch.")]
-        private float crouchTime = 0.25f;     
-        [SerializeField] 
+        private float crouchTime = 0.25f;
+        [SerializeField]
         private AnimationCurve crouchCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
         [SerializeField]
         [EditorTooltip("How long it takes to crouch.")]
         private float standUpTime = 0.25f;
-        [SerializeField] 
+        [SerializeField]
         private AnimationCurve standUpCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         //////// OTHER
@@ -436,7 +436,7 @@ namespace Hertzole.GoldPlayer
             walkingSpeeds.CalculateMax();
             runSpeeds.CalculateMax();
             crouchSpeeds.CalculateMax();
-            
+
             // Cache the hashes for input.
             moveHash = GoldPlayerController.InputNameToHash(input_Move);
             jumpHash = GoldPlayerController.InputNameToHash(input_Jump);
@@ -1086,7 +1086,7 @@ namespace Hertzole.GoldPlayer
                     {
                         crouchTimer = 0;
                         crouchStartPosition = PlayerController.Camera.CameraHead.localPosition.y;
-     
+
 #if NET_4_6 || (UNITY_2018_3_OR_NEWER && !NET_LEGACY)
                         OnEndCrouch?.Invoke();
 #else
@@ -1117,7 +1117,7 @@ namespace Hertzole.GoldPlayer
                     {
                         crouchTimer = 0;
                         crouchStartPosition = PlayerController.Camera.CameraHead.localPosition.y;
-                        
+
 #if NET_4_6 || (UNITY_2018_3_OR_NEWER && !NET_LEGACY)
                         OnBeginCrouch?.Invoke();
 #else
@@ -1142,7 +1142,7 @@ namespace Hertzole.GoldPlayer
 
                 // Used to determine the player head crouch position.
                 float percent = 0;
-                
+
                 if (isCrouching)
                 {
                     // If crouch time is more than 0, smoothly lerp the value. Otherwise just set the value.
@@ -1156,8 +1156,8 @@ namespace Hertzole.GoldPlayer
                         else
                         {
                             percent = 1;
-                        }   
-                        
+                        }
+
                         currentCrouchCameraPosition = Mathf.Lerp(crouchStartPosition, crouchCameraPosition, crouchCurve.Evaluate(percent));
                     }
                     else
@@ -1177,8 +1177,8 @@ namespace Hertzole.GoldPlayer
                         else
                         {
                             percent = 1;
-                        }   
-                        
+                        }
+
                         currentCrouchCameraPosition = Mathf.Lerp(crouchStartPosition, originalCameraPosition, standUpCurve.Evaluate(percent));
                     }
                     else

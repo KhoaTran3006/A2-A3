@@ -42,19 +42,20 @@ namespace Hertzole.GoldPlayer
         {
             get
             {
-                return cam.FieldOfViewKick.UnscaledTime && 
-                       movement.UnscaledTime && 
+                return cam.FieldOfViewKick.UnscaledTime &&
+                       movement.UnscaledTime &&
                        movement.Stamina.UnscaledTime &&
                        headBob.UnscaledTime &&
                        sounds.UnscaledTime;
             }
-            set 
+            set
             {
-                cam.FieldOfViewKick.UnscaledTime = value; 
+                cam.FieldOfViewKick.UnscaledTime = value;
                 movement.UnscaledTime = value;
                 movement.Stamina.UnscaledTime = value;
-                headBob.UnscaledTime = value; 
-                sounds.UnscaledTime = value; }
+                headBob.UnscaledTime = value;
+                sounds.UnscaledTime = value;
+            }
         }
 
         /// <summary> Everything related to the player camera (mouse movement). </summary>

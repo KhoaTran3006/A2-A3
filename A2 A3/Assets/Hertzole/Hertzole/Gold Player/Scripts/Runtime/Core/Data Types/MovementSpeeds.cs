@@ -10,15 +10,15 @@ namespace Hertzole.GoldPlayer
         [SerializeField]
         [EditorTooltip("The speed when moving forward.")]
         [FormerlySerializedAs("m_ForwardSpeed")]
-        private float forwardSpeed;
+        public float forwardSpeed;
         [SerializeField]
         [EditorTooltip("The speed when moving sideways.")]
         [FormerlySerializedAs("m_SidewaysSpeed")]
-        private float sidewaysSpeed;
+        public float sidewaysSpeed;
         [SerializeField]
         [EditorTooltip("The speed when moving backwards.")]
         [FormerlySerializedAs("m_BackwardsSpeed")]
-        private float backwardsSpeed;
+        public float backwardsSpeed;
 
         /// <summary> The speed when moving forward. </summary>
         public float ForwardSpeed { get { return forwardSpeed; } set { forwardSpeed = value; CalculateMax(); } }
