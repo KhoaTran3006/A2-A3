@@ -103,7 +103,22 @@ public class SwitchCamera : MonoBehaviour
         foreach (Collider col in invisibleColli)
         {
             if (col != null)
+            {
                 col.enabled = enable;
+
+                Renderer objRenderer = col.GetComponent<Renderer>();
+                if (objRenderer != null)
+                {
+                    objRenderer.enabled = enable;
+                }
+
+                // Optional: Also handle children renderers if your object is nested
+                Renderer[] childRenderers = col.GetComponentsInChildren<Renderer>();
+                foreach (Renderer rend in childRenderers)
+                {
+                    rend.enabled = enable;
+                }
+            }
         }
     }
 
