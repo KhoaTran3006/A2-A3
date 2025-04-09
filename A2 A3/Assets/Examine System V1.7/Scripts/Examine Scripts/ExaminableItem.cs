@@ -73,8 +73,10 @@ namespace ExamineSystem
 
         #region Initialisation Fields
         private Material objectMaterial;
-        Vector3 originalPosition;
-        Quaternion originalRotation;
+        //Vector3 originalPosition;
+        //Quaternion originalRotation;
+        private Vector3 positionBeforeExamine;
+        private Quaternion rotationBeforeExamine;
         private Vector3 startPos;
         private bool canRotate;
         private float currentZoom = 1;
@@ -117,8 +119,8 @@ namespace ExamineSystem
             inspectPointLayer = 1 << LayerMask.NameToLayer(inspectLayer); //This finds the mask we want and adds it to the variable "inspectPointLayer"
 
             initialZoom = Mathf.Clamp(initialZoom, zoomRange.x, zoomRange.y);
-            originalPosition = transform.position; 
-            originalRotation = transform.rotation;
+           //originalPosition = transform.position; 
+           //originalRotation = transform.rotation;
             startPos = gameObject.transform.localEulerAngles;
 
             DisableEmissionOnChildrenHighlight(true);
@@ -198,6 +200,11 @@ namespace ExamineSystem
             examineUIManager = ExamineUIManager.instance;
 
             boxCollider.enabled = false;
+
+            positionBeforeExamine = transform.position;
+            rotationBeforeExamine = transform.rotation;
+
+
             if (rb != null) rb.isKinematic = true;
 
             EnableInspectPoints();
@@ -244,10 +251,11 @@ namespace ExamineSystem
 
             if (shouldLerp)
             {
-                StartCoroutine(MoveToPosition(transform, originalPosition, smoothExamineSpeed));
+                StartCoroutine(MoveToPosition(transform, positionBeforeExamine, smoothExamineSpeed));
+                transform.rotation = rotationBeforeExamine;
             }
 
-            transform.rotation = originalRotation;
+            //transform.rotation = originalRotation;
 
             SetExamineLayer(defaultLayer);
             PlayDropSound();

@@ -74,7 +74,7 @@ public class SwitchCamera : MonoBehaviour
         {
             camOnHand = !camOnHand;
             camAnimator.SetBool("UseCam", camOnHand);
-            if (!camOnHand) // We are turning OFF the Spiritual Camera
+            if (!camOnHand) // turning OFF the Spiritual Camera
             {
                 if (ExamineSystem.ExamineUIManager.instance.examinableItem != null)
                 {
@@ -117,18 +117,13 @@ public class SwitchCamera : MonoBehaviour
             {
                 col.enabled = enable;
 
-                Renderer objRenderer = col.GetComponent<Renderer>();
-                if (objRenderer != null)
-                {
-                    objRenderer.enabled = enable;
-                }
+                Rigidbody rb = col.GetComponent<Rigidbody>();
+                if (rb != null)
+                    rb.isKinematic = !enable; // freeze physics if collider is off
 
-                // Optional: Also handle children renderers if your object is nested
-                Renderer[] childRenderers = col.GetComponentsInChildren<Renderer>();
-                foreach (Renderer rend in childRenderers)
-                {
+                Renderer rend = col.GetComponent<Renderer>();
+                if (rend != null)
                     rend.enabled = enable;
-                }
             }
         }
     }

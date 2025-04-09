@@ -10,6 +10,11 @@ namespace ExamineSystem
         [SerializeField] private MonoBehaviour player;
         [SerializeField] private BlurOptimized blur;
 
+        [SerializeField] private Camera fpsCamera;
+        [SerializeField] private Camera spiritualCamera;
+        [SerializeField] private BlurOptimized fpsBlur;
+        [SerializeField] private BlurOptimized spiritualBlur;
+
         [Header("Should persist?")]
         [SerializeField] private bool persistAcrossScenes = true;
 
@@ -36,35 +41,36 @@ namespace ExamineSystem
         {
             if (disable)
             {
-                if(player != null)
-                {
+                if (player != null)
                     player.enabled = false;
-                }
                 else
-                {
-                    print("Disable Manager: You will need to add the included player character here but if you have your own, you will need to change the reference");
-                }
+                    Debug.LogWarning("DisableManager: Player not assigned.");
 
                 interactorScript.enabled = false;
 
-                blur.enabled = true;
-                ExamineUIManager.instance.EnableCrosshair(false);
+                // Determine which camera is active and blur that one
+                if (fpsCamera.enabled && fpsBlur != null)
+                    fpsBlur.enabled = true;
+                else if (spiritualCamera.enabled && spiritualBlur != null)
+                    spiritualBlur.enabled = true;
 
+                ExamineUIManager.instance.EnableCrosshair(false);
             }
             else
             {
-                if (player != null) 
-                {
+                if (player != null)
                     player.enabled = true;
-                }
-                else 
-                {
-                    print("Disable Manager: You will need to add the included player character here but if you have your own, you will need to change the reference");
-                }
+                else
+                    Debug.LogWarning("DisableManager: Player not assigned.");
 
                 interactorScript.enabled = true;
 
-                blur.enabled = false;
+                // Disable blur on both cameras
+                if (fpsBlur != null)
+                    fpsBlur.enabled = false;
+                if (spiritualBlur != null)
+                    spiritualBlur.enabled = false;
+
                 ExamineUIManager.instance.EnableCrosshair(true);
             }
         }
