@@ -146,7 +146,7 @@ public class MovingGhost : MonoBehaviour
         Quaternion targetCamRot = Quaternion.Euler(0f, 0f, 0f);
 
         Quaternion startBodyRot = movementScript.transform.rotation;
-        Quaternion targetBodyRot = Quaternion.Euler(0f, 90f, 0f); // <-- set your desired yaw here
+        Quaternion targetBodyRot = Quaternion.Euler(0f, 0f, 0f); // <-- set your desired yaw here
 
         while (elapsed < duration)
         {
