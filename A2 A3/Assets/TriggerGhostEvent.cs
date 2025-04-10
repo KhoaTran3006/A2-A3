@@ -11,6 +11,7 @@ public class TriggerGhostEvent : MonoBehaviour
     public AudioSource ghostSound;
     public AudioSource doorSlam;
     private bool hasTriggered = false;
+    public GameObject hiddenWall;
 
     void OnTriggerEnter(Collider other)
     {
@@ -23,6 +24,8 @@ public class TriggerGhostEvent : MonoBehaviour
 
     IEnumerator ItsComing()
     {
+        hiddenWall.SetActive(true);
+
         ghostSound.Play();
         doorSlam.Play();
 
