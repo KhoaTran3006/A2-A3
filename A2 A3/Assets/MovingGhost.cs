@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Hertzole.GoldPlayer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Rendering.PostProcessing;
+
 
 public class MovingGhost : MonoBehaviour
 {
@@ -13,19 +13,10 @@ public class MovingGhost : MonoBehaviour
 
     public bool isMoving = false;
     private bool hasStartedMoving = false;
-
-    public PostProcessVolume postProcessVolume;
-    private Vignette fpsCamVignette;
-
+    public Animator fpsCamAnima;
     public GoldPlayerController movementScript;
+    public FadeInFadeOut fadeScript;
 
-    void Start()
-    {
-        //postProcessVolume.profile = Instantiate(postProcessVolume.profile);
-        postProcessVolume.profile.TryGetSettings(out fpsCamVignette);
-        fpsCamVignette.intensity.value = 0f;
-
-    }
     void Update()
     {
         if (isMoving && !hasStartedMoving)
@@ -33,6 +24,7 @@ public class MovingGhost : MonoBehaviour
             hasStartedMoving = true;
             StartCoroutine(MoveStepByStep());
         }
+
     }
 
     IEnumerator MoveStepByStep()
@@ -75,15 +67,13 @@ public class MovingGhost : MonoBehaviour
             StartCoroutine(CatchYa());
             StartCoroutine(DrainSpeed());
             //isMoving = false;
-
-            StartCoroutine(IncreaseVignette());
         }
     }
 
-    // Decrease mouse sentivity when touched by ghost
+    // Decrease mouse sensitivity when touched by ghost
     IEnumerator CatchYa()
     {
-        float duration = 5f;
+        float duration = 10f;
         float elapsed = 0f;
 
         Vector2 originalSensitivity = movementScript.Camera.lookSensitivity;
@@ -135,26 +125,46 @@ public class MovingGhost : MonoBehaviour
         movementScript.Movement.walkingSpeeds = target;
         movementScript.Movement.runSpeeds = target;
         movementScript.enabled = false;
+
+        StartCoroutine(ResetLookDirection()); // Add this for player to alway face to same direction before faint
+
+        yield return new WaitForSeconds(1f);
+        fpsCamAnima.SetBool("UrDone", true);
+
+        yield return new WaitForSeconds(2f);
+        fadeScript.BlackScreenOut();
     }
 
-    //Blind Effect but IT DOES NOT WORK for some unknown reasons
-    IEnumerator IncreaseVignette()
+    // Bring the player view back to the same level
+    IEnumerator ResetLookDirection()
     {
-        float duration = 3f; // time in seconds to reach target
+        float duration = 1.5f;
         float elapsed = 0f;
-        float startIntensity = fpsCamVignette.intensity.value;
-        float targetIntensity = 1f;
+
+        // Starting rotations
+        Quaternion startCamRot = movementScript.Camera.CameraHead.localRotation;
+        Quaternion targetCamRot = Quaternion.Euler(0f, 0f, 0f);
+
+        Quaternion startBodyRot = movementScript.transform.rotation;
+        Quaternion targetBodyRot = Quaternion.Euler(0f, 90f, 0f); // <-- set your desired yaw here
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
 
-            fpsCamVignette.intensity.value = Mathf.Lerp(startIntensity, targetIntensity, t);
+            // Smoothly rotate camera pitch
+            movementScript.Camera.CameraHead.localRotation = Quaternion.Lerp(startCamRot, targetCamRot, t);
+
+            // Smoothly rotate player body
+            movementScript.transform.rotation = Quaternion.Lerp(startBodyRot, targetBodyRot, t);
+
             yield return null;
         }
 
-        fpsCamVignette.intensity.value = targetIntensity;
+        // Snap to final rotation to be safe
+        movementScript.Camera.CameraHead.localRotation = targetCamRot;
+        movementScript.transform.rotation = targetBodyRot;
     }
 }
 
