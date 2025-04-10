@@ -17,6 +17,11 @@ public class MovingGhost : MonoBehaviour
     public GoldPlayerController movementScript;
     public FadeInFadeOut fadeScript;
 
+    void Start()
+    {
+        fpsCamAnima.enabled = false;
+    }
+
     void Update()
     {
         if (isMoving && !hasStartedMoving)
@@ -125,14 +130,15 @@ public class MovingGhost : MonoBehaviour
         movementScript.Movement.walkingSpeeds = target;
         movementScript.Movement.runSpeeds = target;
         movementScript.enabled = false;
-
+        fpsCamAnima.enabled = true;
         StartCoroutine(ResetLookDirection()); // Add this for player to alway face to same direction before faint
 
         yield return new WaitForSeconds(1f);
         fpsCamAnima.SetBool("UrDone", true);
 
         yield return new WaitForSeconds(2f);
-        fadeScript.BlackScreenOut();
+        fadeScript.PassOut();
+        Debug.Log("yo");
     }
 
     // Bring the player view back to the same level
