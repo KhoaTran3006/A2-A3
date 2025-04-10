@@ -11,7 +11,8 @@ public class FadeInFadeOut : MonoBehaviour
     public GameObject blackScreen;
 
     public void Start()
-    {fadeCanvasGroup.alpha = 0f;
+    {
+        fadeCanvasGroup.alpha = 0f;
         blackScreen.SetActive(false);
     }
     public void BlackScreenOut()
@@ -20,7 +21,7 @@ public class FadeInFadeOut : MonoBehaviour
     }
     public IEnumerator FadeOut()
     {
-        Debug.Log("StartFading");
+        //Debug.Log("StartFading");
         blackScreen.SetActive(true);
         fadeCanvasGroup.alpha = 0f;
 

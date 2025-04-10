@@ -11,6 +11,7 @@ public class TriggerGhostEvent : MonoBehaviour
     public AudioSource ghostSound;
     public AudioSource doorSlam;
     private bool hasTriggered = false;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !hasTriggered)
