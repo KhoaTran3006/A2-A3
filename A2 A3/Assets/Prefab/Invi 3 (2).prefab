@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 1118111138403875756}
   - component: {fileID: 1448466822071266893}
   - component: {fileID: 6014294238149616743}
+  - component: {fileID: 4064330355474454229}
   - component: {fileID: 5490737590350468658}
+  - component: {fileID: 5234595191000833940}
   - component: {fileID: 2350963786098405492}
+  - component: {fileID: 1531746882624058671}
   m_Layer: 0
   m_Name: Invi 3 (2)
   m_TagString: Untagged
@@ -85,6 +88,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4064330355474454229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113906151830547556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0035fdce63368f648a4e83a49a56cbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &5490737590350468658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,6 +121,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5234595191000833940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113906151830547556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5b6aa6b3566364587f090d611bd5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEmptyParent: 0
+  _hasChildren: 0
+  childObjects: []
+  initialRotationOffset: {x: 0, y: 0, z: 0}
+  horizontalOffset: 0
+  verticalOffset: 0
+  smoothExamineSpeed: 0.2
+  initialZoom: 1
+  zoomRange: {x: 0.5, y: 2}
+  zoomSensitivity: 0.1
+  rotationSpeed: 2.5
+  invertRotation: 0
+  showEmissionHighlight: 0
+  showNameHighlight: 1
+  _hasInspectPoints: 0
+  inspectPoints: []
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
+  _UIType: 1
+  itemName: Yellow Cube
+  textSize: 32
+  fontType: {fileID: 0}
+  fontColor: {r: 1, g: 1, b: 1, a: 1}
+  itemDescription: This Is a Cube
+  textSizeDesc: 30
+  fontTypeDesc: {fileID: 0}
+  fontColorDesc: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2350963786098405492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,3 +174,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inspectionPrefab: {fileID: 6113906151830547556}
   description: 
+--- !u!54 &1531746882624058671
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113906151830547556}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
