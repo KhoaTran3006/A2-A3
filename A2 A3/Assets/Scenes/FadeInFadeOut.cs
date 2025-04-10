@@ -11,7 +11,7 @@ public class FadeInFadeOut : MonoBehaviour
     public GameObject blackScreen;
 
     public void Start()
-    {
+    {fadeCanvasGroup.alpha = 0f;
         blackScreen.SetActive(false);
     }
     public void BlackScreenOut()
@@ -20,7 +20,9 @@ public class FadeInFadeOut : MonoBehaviour
     }
     public IEnumerator FadeOut()
     {
+        Debug.Log("StartFading");
         blackScreen.SetActive(true);
+        fadeCanvasGroup.alpha = 0f;
 
         // Increase the alpha of the black screen img
         fadeCanvasGroup.blocksRaycasts = true;
@@ -37,4 +39,5 @@ public class FadeInFadeOut : MonoBehaviour
         // When done turn off the black screen
         blackScreen.SetActive(false);
     }
+
 }

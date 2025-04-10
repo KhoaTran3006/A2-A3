@@ -79,26 +79,39 @@ public class SwitchCamera : MonoBehaviour
                 if (ExamineSystem.ExamineUIManager.instance.examinableItem != null)
                 {
                     ExamineSystem.ExamineUIManager.instance.examinableItem.ForceDropIfExamining();
+                    
                 }
             }
 
-            StartCoroutine(ToggleCamera()); // Toggle between FPS camera and Cam Obj
+            StartCoroutine(ToggleCamera());
+             // Toggle between FPS camera and Cam Obj
             //ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
-           //if (!camOnHand)
-           //{
-           //    // Trigger fade out effect
-           //    fadeOutScript.BlackScreenOut();
-           //}
+           if (!camOnHand)
+           {           
+               //Trigger fade out effect
+                //fadeOutScript.BlackScreenOut();
+                StartCoroutine(Fading());
+                Debug.Log("started");
+           }
         }
+    }
+    IEnumerator Fading(){
+        yield return new WaitForSeconds(0.1f);
+        fadeOutScript.BlackScreenOut();
     }
 
     IEnumerator ToggleCamera()
     {
+        //fadeOutScript.BlackScreenOut(); 
+
+        
         yield return new WaitForSeconds(1.1f); // wait for animation to finish
 
+        //fadeOutScript.BlackScreenOut();
         // Switch view
         fpsCam.enabled = !camOnHand;
         camView.enabled = camOnHand;
+        
 
         cameraObj.SetActive(!camOnHand);
 
@@ -106,11 +119,12 @@ public class SwitchCamera : MonoBehaviour
         camAnimator.SetBool("CamOff", !camOnHand);
 
        
-        ToggleCollider(camOnHand); ;
+        ToggleCollider(camOnHand);
     }
 
     void ToggleCollider(bool enable)
     {
+        
         foreach (Collider col in invisibleColli)
         {
             if (col != null)
