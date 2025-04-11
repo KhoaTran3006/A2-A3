@@ -16,7 +16,8 @@ public class MovingGhost : MonoBehaviour
     public Animator fpsCamAnima;
     public GoldPlayerController movementScript;
     public FadeInFadeOut fadeScript;
-
+    public AudioSource falldownSound;
+    public AudioSource chokeSound;
     void Start()
     {
         fpsCamAnima.enabled = false;
@@ -133,12 +134,19 @@ public class MovingGhost : MonoBehaviour
         fpsCamAnima.enabled = true;
         StartCoroutine(ResetLookDirection()); // Add this for player to alway face to same direction before faint
 
+        chokeSound.Play();
+
         yield return new WaitForSeconds(1f);
         fpsCamAnima.SetBool("UrDone", true);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        //Debug.Log("yo");
+        falldownSound.Play();
+
+        yield return new WaitForSeconds(1f);
         fadeScript.PassOut();
-        Debug.Log("yo");
+
+
     }
 
     // Bring the player view back to the same level

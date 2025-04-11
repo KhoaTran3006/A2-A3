@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Hertzole.GoldPlayer;
 using UnityEngine;
 
 public class TriggerGhostEvent : MonoBehaviour
@@ -12,6 +13,7 @@ public class TriggerGhostEvent : MonoBehaviour
     public AudioSource doorSlam;
     private bool hasTriggered = false;
     public GameObject hiddenWall;
+    public GoldPlayerController movementScript;
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,6 +21,7 @@ public class TriggerGhostEvent : MonoBehaviour
         {
             hasTriggered = true;
             StartCoroutine(ItsComing());
+            movementScript.Movement.canRun = true;
         }
     }
 

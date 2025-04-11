@@ -27,7 +27,7 @@ namespace Hertzole.GoldPlayer
         [SerializeField]
         [EditorTooltip("Determines if the player can run.")]
         [FormerlySerializedAs("m_CanRun")]
-        private bool canRun = true;
+        public bool canRun = true;
         [SerializeField]
         [EditorTooltip("Configuration of running as a toggle.")]
         [FormerlySerializedAs("m_RunToggleMode")]
