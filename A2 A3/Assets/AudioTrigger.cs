@@ -8,12 +8,14 @@ public class AudioTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
-    void OnTriggerEnter(Collider other){
-        if(other.CompareTag("Player")){
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
             audio.Play();
             GetComponent<BoxCollider>().enabled = false;
         }

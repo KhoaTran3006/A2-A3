@@ -6,14 +6,20 @@ using UnityEngine;
 public class FadeInFadeOut : MonoBehaviour
 {
     public CanvasGroup fadeCanvasGroup;
+    public CanvasGroup beginningCanvasGroup;
     public float fadeDuration = 1f;
     public SwitchCamera switchCamScript;
     public GameObject blackScreen;
+    public GameObject beginningScreen;
 
     public void Start()
     {
         fadeCanvasGroup.alpha = 0f;
         blackScreen.SetActive(false);
+    }
+    public void WakeUp()
+    {
+        StartCoroutine(FadeIn());
     }
     public void BlackScreenOut()
     {
@@ -62,7 +68,18 @@ public class FadeInFadeOut : MonoBehaviour
         }
         fadeCanvasGroup.alpha = 1f;
         yield return new WaitForSeconds(0.2f);
+    }
 
-
+    public IEnumerator FadeIn()
+    {
+        float time = fadeDuration;
+        while (time > 0f)
+        {
+            time -= Time.deltaTime;
+            beginningCanvasGroup.alpha = time / fadeDuration;
+            yield return null;
+        }
+        beginningCanvasGroup.alpha = 0f;
+        beginningCanvasGroup.blocksRaycasts = false;
     }
 }
