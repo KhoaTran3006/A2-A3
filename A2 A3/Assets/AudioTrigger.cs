@@ -18,6 +18,7 @@ public class AudioTrigger : MonoBehaviour
         {
             audio.Play();
             GetComponent<BoxCollider>().enabled = false;
+            Destroy(gameObject, 0.5f);
         }
     }
 }
