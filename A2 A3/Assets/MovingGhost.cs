@@ -146,6 +146,9 @@ public class MovingGhost : MonoBehaviour
         yield return new WaitForSeconds(1f);
         fadeScript.PassOut();
 
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("Scene 2");
+
 
     }
 
