@@ -29,16 +29,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a79b01ea5641d4aa6daa2e23605641, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
   intensity:
     overrideState: 1
-    value: 1.8
+    value: 2.22
   threshold:
     overrideState: 1
-    value: 0.24
+    value: 0.21
   softKnee:
     overrideState: 0
     value: 0.5
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cb7e9e120078f43bce4f0b1be547a7, type: 3}
   m_Name: AmbientOcclusion
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enabled:
     overrideState: 1
     value: 1
@@ -84,8 +84,8 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   intensity:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 0.63
   color:
     overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
@@ -134,10 +134,10 @@ MonoBehaviour:
     value: 1
   shutterAngle:
     overrideState: 1
-    value: 310
+    value: 283
   sampleCount:
     overrideState: 1
-    value: 10
+    value: 22
 --- !u!114 &7618489165524526321
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -209,7 +209,7 @@ MonoBehaviour:
     value: 0
   postExposure:
     overrideState: 1
-    value: 0.1
+    value: -0.02
   contrast:
     overrideState: 0
     value: 28
