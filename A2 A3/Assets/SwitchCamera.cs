@@ -72,6 +72,7 @@ public class SwitchCamera : MonoBehaviour
         // Press C to swtich view
         if (Input.GetKeyDown(KeyCode.C) && equipCam)
         {
+            //Debug.Log(camOnHand);
             camOnHand = !camOnHand;
             camAnimator.SetBool("UseCam", camOnHand);
             if (!camOnHand) // turning OFF the Spiritual Camera
