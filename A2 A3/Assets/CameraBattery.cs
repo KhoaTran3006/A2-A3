@@ -38,7 +38,8 @@ public class CameraBattery : MonoBehaviour
     {
         if (switchCameraScript == null || batteryEmpty)
         {
-            noMoreCam.SetActive(true);
+            //noMoreCam.SetActive(true);
+            return;
         }
 
         if (currentBatteryLevel <= 0)
@@ -64,15 +65,19 @@ public class CameraBattery : MonoBehaviour
             }
         }
 
+
         if (switchCameraScript.camOnHand == false)
         {
-            StartCoroutine(TurnOffSlowly());
+            StartCoroutine(TurnOffUI());
+            /*
             if (batteryEmpty)
             {
                 batteryEmpty = false;
                 is2ndCoroutineRunning = false;
             }
+            */
         }
+
 
         if (switchCameraScript.camOnHand == false && batteryEmpty == false && !is2ndCoroutineRunning)
         {
@@ -94,7 +99,7 @@ public class CameraBattery : MonoBehaviour
         isCoroutineRunning = false;
     }
 
-    private IEnumerator TurnOffSlowly()
+    private IEnumerator TurnOffUI()
     {
         yield return new WaitForSeconds(1.2f);
         batteryUIContainer.SetActive(false);
@@ -125,7 +130,20 @@ public class CameraBattery : MonoBehaviour
         {
             currentBatteryLevel = 0;
             batteryEmpty = true;
-            //Debug.Log("Out of Battery");
+            Debug.Log("Out of Battery");
+
+            // If battery empty force turn camera off 
+            if (switchCameraScript != null)
+            {
+                Debug.Log("Calling ToggleCamera Coroutine");
+                switchCameraScript.camOnHand = false;
+                StartCoroutine(switchCameraScript.ToggleCamera());
+                StartCoroutine(switchCameraScript.Fading());
+            }
+            else
+            {
+                Debug.LogError("switchCameraScript is null!");
+            }
         }
 
     }
