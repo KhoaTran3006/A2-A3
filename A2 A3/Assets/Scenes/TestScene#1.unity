@@ -2346,7 +2346,7 @@ MonoBehaviour:
   noMoreCam: {fileID: 1674615551}
   batteryUIContainer: {fileID: 1079441787}
   switchCameraScript: {fileID: 150536184}
-  drainTime: 30
+  drainTime: 2
   batteryEmpty: 0
 --- !u!1 &802814153
 GameObject:
@@ -3562,6 +3562,10 @@ PrefabInstance:
       propertyPath: shakeDuration
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6052741258681217609, guid: 53c43a8ca1f02a4468880d3cecf7c6bb, type: 3}
+      propertyPath: batteryScript
+      value: 
+      objectReference: {fileID: 790041689}
     - target: {fileID: 6052741258681217609, guid: 53c43a8ca1f02a4468880d3cecf7c6bb, type: 3}
       propertyPath: fadeOutScript
       value: 

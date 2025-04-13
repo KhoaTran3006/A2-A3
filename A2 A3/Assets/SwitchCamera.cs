@@ -20,6 +20,7 @@ public class SwitchCamera : MonoBehaviour
     public Collider[] invisibleColli;
     [Header("==========Script==========")]
     public FadeInFadeOut fadeOutScript;
+    public CameraBattery batteryScript;
 
     void Start()
     {
@@ -72,37 +73,40 @@ public class SwitchCamera : MonoBehaviour
         // Press C to swtich view
         if (Input.GetKeyDown(KeyCode.C) && equipCam)
         {
-            //Debug.Log(camOnHand);
-            camOnHand = !camOnHand;
-            camAnimator.SetBool("UseCam", camOnHand);
-            if (!camOnHand) // turning OFF the Spiritual Camera
+            if (batteryScript.batteryEmpty == false)
             {
-                if (ExamineSystem.ExamineUIManager.instance.examinableItem != null)
+                camOnHand = !camOnHand;
+                camAnimator.SetBool("UseCam", camOnHand);
+                if (!camOnHand) // turning OFF the Spiritual Camera
                 {
-                    ExamineSystem.ExamineUIManager.instance.examinableItem.ForceDropIfExamining();
+                    if (ExamineSystem.ExamineUIManager.instance.examinableItem != null)
+                    {
+                        ExamineSystem.ExamineUIManager.instance.examinableItem.ForceDropIfExamining();
 
+                    }
+                }
+
+                StartCoroutine(ToggleCamera());
+                // Toggle between FPS camera and Cam Obj
+                //ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
+                if (!camOnHand)
+                {
+                    StartCoroutine(Fading());
                 }
             }
-
-            StartCoroutine(ToggleCamera());
-            // Toggle between FPS camera and Cam Obj
-            //ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
-            if (!camOnHand)
+            if (batteryScript.batteryEmpty == true)
             {
-                //Trigger fade out effect
-                //fadeOutScript.BlackScreenOut();
-                StartCoroutine(Fading());
-                //Debug.Log("started");
+                Debug.Log("Cannot Use Cam Now");
             }
         }
     }
-    IEnumerator Fading()
+    public IEnumerator Fading()
     {
         yield return new WaitForSeconds(0.1f);
         fadeOutScript.BlackScreenOut();
     }
 
-    IEnumerator ToggleCamera()
+    public IEnumerator ToggleCamera()
     {
         //fadeOutScript.BlackScreenOut(); 
 
@@ -114,12 +118,10 @@ public class SwitchCamera : MonoBehaviour
         fpsCam.enabled = !camOnHand;
         camView.enabled = camOnHand;
 
-
         cameraObj.SetActive(!camOnHand);
 
         camAnimator.SetBool("1stTimeTrigger", true);
         camAnimator.SetBool("CamOff", !camOnHand);
-
 
         ToggleCollider(camOnHand);
     }
