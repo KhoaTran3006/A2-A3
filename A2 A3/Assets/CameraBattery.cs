@@ -26,7 +26,7 @@ public class CameraBattery : MonoBehaviour
     void Start()
     {
         UpdateBatteryUI();
-        noMoreCam.SetActive(false);
+        //noMoreCam.SetActive(false);
 
         if (batteryUIContainer != null)
         {
@@ -36,11 +36,13 @@ public class CameraBattery : MonoBehaviour
 
     void Update()
     {
+        /*
         if (switchCameraScript == null || batteryEmpty)
         {
             //noMoreCam.SetActive(true);
             return;
         }
+        */
 
         if (currentBatteryLevel <= 0)
         {

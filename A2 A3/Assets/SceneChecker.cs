@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class SceneChecker : MonoBehaviour
 {
     public bool isScene2;
+    public bool isScene1;
     public Animator fpsAnima;
 
     public FadeInFadeOut fadeinScript;
     public bool isTriggered;
 
     public GoldPlayerController playerScript;
+    public SwitchCamera switchCameraScript;
 
     void Start()
     {
@@ -23,11 +25,26 @@ public class SceneChecker : MonoBehaviour
             isScene2 = true;
             //Debug.Log("We are in Scene 2!");
             playerScript.Camera.CanLookAround = false;
+            fadeinScript.beginningScreen.SetActive(true);
         }
         else
         {
             isScene2 = false;
             //Debug.Log("This is not Scene 2.");
+        }
+
+        if (currentScene == "Scene 1") // Replace with your actual scene name
+        {
+            isScene1 = true;
+            //Debug.Log("We are in Scene 1!");
+            switchCameraScript.canEquipCam = false;
+            fadeinScript.beginningScreen.SetActive(false);
+        }
+        else
+        {
+            isScene1 = false;
+            //Debug.Log("This is not Scene 1.");
+            switchCameraScript.canEquipCam = true;
         }
     }
 

@@ -15,7 +15,7 @@ public class SwitchCamera : MonoBehaviour
 
     [Header("==========Bool==========")]
     public bool camOnHand = false;
-    public bool equipCam = false;
+    public bool canEquipCam = false;
     [Header("======InvisibleColliders======")]
     public Collider[] invisibleColli;
     [Header("==========Script==========")]
@@ -56,6 +56,7 @@ public class SwitchCamera : MonoBehaviour
 
     void Update()
     {
+        /*
         // Press E equip Camera first
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -69,9 +70,10 @@ public class SwitchCamera : MonoBehaviour
                 CameraEquiped();
             }
         }
+        */
 
         // Press C to swtich view
-        if (Input.GetKeyDown(KeyCode.C) && equipCam)
+        if (Input.GetKeyDown(KeyCode.C) && canEquipCam)
         {
             if (batteryScript.batteryEmpty == false)
             {
@@ -84,14 +86,15 @@ public class SwitchCamera : MonoBehaviour
                         ExamineSystem.ExamineUIManager.instance.examinableItem.ForceDropIfExamining();
 
                     }
+                    StartCoroutine(Fading());
                 }
 
-                StartCoroutine(ToggleCamera());
-                // Toggle between FPS camera and Cam Obj
+                StartCoroutine(ToggleCamera()); // Toggle between FPS camera and Cam Obj
+
                 //ToggleCollider(camOnHand); // Enable or Disable invisible object colliders based on camOnHand
                 if (!camOnHand)
                 {
-                    StartCoroutine(Fading());
+                    //StartCoroutine(Fading());
                 }
             }
             if (batteryScript.batteryEmpty == true)
@@ -146,10 +149,12 @@ public class SwitchCamera : MonoBehaviour
         }
     }
 
+    /*
     public void CameraEquiped()
     {
         camAnimator.SetBool("OnHand", equipCam);
         camAnimator.SetBool("1stTimeTrigger", equipCam);
         camAnimator.SetBool("TakeCamOff", true);
     }
+    */
 }
