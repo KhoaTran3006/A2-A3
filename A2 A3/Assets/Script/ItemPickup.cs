@@ -8,6 +8,7 @@ public class ItemPickup : MonoBehaviour
     public float pickupRange = 3f;         // Max distance to pick up an object
     public Transform onHandPos;            // Empty GameObject under the camera where items are held
     public float throwForce;
+    public Transform throwPos;
 
     private GameObject heldObject;         // Reference to the currently held object
     private Camera cam;                    // Reference to the main camera
@@ -75,6 +76,11 @@ public class ItemPickup : MonoBehaviour
 
     void DropItem()
     {
+        if (heldObject == null || throwPos == null) return;
+
+        // Move the held object to throw position
+        heldObject.transform.position = throwPos.position;
+
         // Re-enable physics
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb)
@@ -82,11 +88,11 @@ public class ItemPickup : MonoBehaviour
             rb.isKinematic = false;
             rb.useGravity = true;
 
-            
+            // Throw in the forward direction of the camera
             rb.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
         }
 
-        // Detach from the camera's hand position
+        // Detach from any parent
         heldObject.transform.SetParent(null);
         heldObject = null;
     }
