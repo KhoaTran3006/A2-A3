@@ -49,8 +49,9 @@ public class DoorSystem : MonoBehaviour
     void TryOpen()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        PickupHandler pickup = player.GetComponent<PickupHandler>();
-        GameObject heldItem = pickup?.HeldObject;
+        ItemPickup pickup = player.GetComponent<ItemPickup>();
+
+        GameObject heldItem = GetHeldItem(pickup);
         KeyType heldKey = GetHeldKeyType(heldItem);
 
         if (requiredKey == KeyType.None || heldKey == requiredKey)
@@ -98,9 +99,8 @@ public class DoorSystem : MonoBehaviour
     void HandleDoorToggle()
     {
         GameObject player = GameObject.FindWithTag("Player");
-        PickupHandler pickup = player.GetComponent<PickupHandler>();
-        GameObject heldItem = pickup?.HeldObject;
-
+        ItemPickup pickup = player.GetComponent<ItemPickup>();
+        GameObject heldItem = GetHeldItem(pickup);
         KeyType heldKey = GetHeldKeyType(heldItem);
 
         //Player is trying to open a locked door without correct key
@@ -153,21 +153,10 @@ public class DoorSystem : MonoBehaviour
 
     KeyType GetHeldKeyType(GameObject item)
     {
-        if (item == null)
-        {
-            Debug.Log("[DoorSystem] heldItem is null");
-            return KeyType.None;
-        }
+        if (item == null) return KeyType.None;
 
         DoorKey key = item.GetComponent<DoorKey>();
-        if (key == null)
-        {
-            Debug.Log("[DoorSystem] DoorKey component missing on held item");
-            return KeyType.None;
-        }
-
-        Debug.Log("[DoorSystem] Held item keyType: " + key.keyType);
-        return key.keyType;
+        return key != null ? key.keyType : KeyType.None;
     }
 
     void OpenDoor(Vector3 playerPos)
@@ -196,16 +185,15 @@ public class DoorSystem : MonoBehaviour
         transform.rotation = targetRotation;
     }
 
-   //GameObject GetHeldItem(ItemPickup pickup)
-   //{
-   //    //var held = pickup.GetType()
-   //    //                 .GetField("heldObject", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-   //    //                 ?.GetValue(pickup) as GameObject;
-   //    //
-   //    //Debug.Log($"[DoorSystem] Held item: {(held != null ? held.name : "None")}");
-   //    //return held;
-   //    return pickup.HeldObject;
-   //}
+    GameObject GetHeldItem(ItemPickup pickup)
+    {
+        var held = pickup.GetType()
+                         .GetField("heldObject", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+                         ?.GetValue(pickup) as GameObject;
+
+        Debug.Log($"[DoorSystem] Held item: {(held != null ? held.name : "None")}");
+        return held;
+    }
 
     bool HasCorrectKey(GameObject item)
     {
