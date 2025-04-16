@@ -12,6 +12,7 @@ TagManager:
   - Open Doors
   - ExaminePoint
   - InspectPoint
+  - Fruit
   layers:
   - Default
   - TransparentFX
